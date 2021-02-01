@@ -1,2 +1,2 @@
 # isolar
-Small Object Orientated PHP Framework.
+Small Object Orientated PHP Framework. More detailed readme coming soon. Hopefully.
