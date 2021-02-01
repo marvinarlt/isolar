@@ -1,0 +1,19 @@
+{
+    "name": "marvinarlt/isolar",
+    "description": "Small OOP Framework.",
+    "authors": [
+        {
+            "name": "Marvin Arlt",
+            "email": "mail@marvinarlt.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Isolar\\": "src/"
+        }
+    },
+    "require": {
+        "filp/whoops": "^2.9",
+        "twig/twig": "^3.2"
+    }
+}
