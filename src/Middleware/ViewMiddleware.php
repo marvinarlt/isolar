@@ -24,6 +24,7 @@ class ViewMiddleware extends AbstractMiddleware implements MiddlewareInterface
 
         $translation = $i18nService->getTranslation();
         $viewService->setTranslation($translation);
+        $viewService->setRequest($request);
 
         $next();
     }

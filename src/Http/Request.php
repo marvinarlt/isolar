@@ -89,8 +89,16 @@ class Request
      * 
      * @return string
      */
-    public function getParameter(string $name): string
+    public function getParameter(string $name = null): mixed
     {
+        if (! isset($this->currentRoute['parameters'])) {
+            return '';
+        }
+
+        if (is_null($name)) {
+            return $this->currentRoute['parameters'];
+        }
+
         if (! isset($this->currentRoute['parameters'][$name])) {
             return '';
         }

@@ -2,8 +2,9 @@
 
 namespace Isolar\Service;
 
-use Twig\Loader\FilesystemLoader;
+use Isolar\Http\Request;
 use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 use Twig\Extension\DebugExtension;
 
 class ViewService
@@ -21,6 +22,13 @@ class ViewService
      * @var array $translation
      */
     protected $translation;
+
+    /**
+     * Stores the request instance.
+     * 
+     * @var Request
+     */
+    protected $request;
 
     /**
      * @param array $translation
@@ -51,12 +59,47 @@ class ViewService
         $twig->addExtension(new DebugExtension());
 
         $globalData = [
-            'translation' => $this->translation
+            'translation' => $this->translation,
+            'page' => $this->getPageContent()
         ];
 
         $data = array_merge($globalData, $data);
 
         return $twig->render($template, $data);
+    }
+
+    /**
+     * Returns the page data for the view.
+     * 
+     * @return array
+     */
+    protected function getPageContent(): array
+    {
+        return [
+            'root' => $this->request->getRoot(),
+            'parameter' => $this->request->getParameter(),
+            'seo' => $this->getPageSeo()
+        ];
+    }
+
+    /**
+     * Returns the page seo variables.
+     * 
+     * @return array
+     */
+    protected function getPageSeo(): array
+    {
+        $route = $this->request->getCurrentRoute();
+
+        if (! isset($route['name'])) {
+            return [];
+        }
+
+        if (! isset($this->translation[$route['name']])) {
+            return [];
+        }
+        
+        return $this->translation[$route['name']];
     }
 
     /**
@@ -69,5 +112,17 @@ class ViewService
     public function setTranslation(array $translation): void
     {
         $this->translation = $translation;
+    }
+
+    /**
+     * Sets the request.
+     * 
+     * @param Request $request
+     * 
+     * @return void
+     */
+    public function setRequest(Request $request): void
+    {
+        $this->request = $request;
     }
 }
