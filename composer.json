@@ -1,12 +1,15 @@
 {
     "name": "marvinarlt/isolar",
     "description": "Small OOP Framework.",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Marvin Arlt",
             "email": "mail@marvinarlt.de"
         }
     ],
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Isolar\\": "src/"

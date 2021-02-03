@@ -20,11 +20,8 @@ class RouteCollector
      */
     public function add(array $route): void
     {
-        $processedRoute = $this->processRoute($route);
-        $processedI18nRoute = $this->processI18nRoute($route);
-
-        $this->routes[] = $processedRoute;
-        $this->routes[] = $processedI18nRoute;
+        $this->routes[] = $this->processRoute($route);
+        $this->routes[] = $this->processI18nRoute($route);
     }
 
     /**
